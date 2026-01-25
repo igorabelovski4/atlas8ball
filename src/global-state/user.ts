@@ -4,6 +4,6 @@ import { supabaseClient } from '../supabase/supabaseClient';
 
 export const $currUser = atom<User | null>(null);
 
-supabaseClient.auth.onAuthStateChange((authChangeEvent, session) => {
+supabaseClient.auth.onAuthStateChange((_authChangeEvent, session) => {
   $currUser.set(session?.user || null);
 });
