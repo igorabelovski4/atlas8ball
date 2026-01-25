@@ -1,0 +1,18 @@
+.box {
+  @media (max-width: 768px) {
+    margin-top: 0 !important;
+  }
+}
+
+.text {
+  @media (max-width: 768px) {
+    font-size: 28px !important;
+  }
+}
+
+.semicolons {
+  @media (max-width: 768px) {
+    font-size: 20px !important;
+    margin: 0 12px !important;
+  }
+}

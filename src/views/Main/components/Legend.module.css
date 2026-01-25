@@ -1,0 +1,11 @@
+.box {
+  @media (max-width: 768px) {
+    margin-bottom: 12px !important;
+  }
+}
+
+.text {
+  @media (max-width: 768px) {
+    font-size: 11px !important;
+  }
+}

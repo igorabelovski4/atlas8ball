@@ -1,0 +1,6 @@
+.box {
+  @media (max-width: 768px) {
+    padding: 4px 20px 0 20px !important;
+    margin-bottom: 12px !important;
+  }
+}

@@ -1,0 +1,17 @@
+.box {
+  @media (max-width: 768px) {
+    margin-bottom: 16px !important;
+  }
+}
+
+.inner {
+  @media (max-width: 768px) {
+    margin-bottom: 2px !important;
+  }
+}
+
+.text {
+  @media (max-width: 768px) {
+    font-size: 13px !important;
+  }
+}
