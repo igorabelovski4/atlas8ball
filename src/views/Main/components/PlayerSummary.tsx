@@ -9,9 +9,9 @@ export default function PlayerSummary({
   leader,
 }: PlayerSummaryProps) {
   return (
-    <Stack align="center" gap="xs">
+    <Stack align="center" gap="xs" pos="relative">
       {leader && (
-        <Box pos="absolute" top={12} className={classes.crownBox}>
+        <Box pos="absolute" top={-32} className={classes.crownBox}>
           <IconCrown size={32} color="#fab005" className={classes.crown} />
         </Box>
       )}

@@ -1,6 +1,6 @@
 .crownBox {
   @media (max-width: 768px) {
-    top: 4px !important;
+    top: -26px !important;
   }
 }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { supabaseClient } from '../../supabase/supabaseClient';
 
 import { Container, Group, Stack, Title } from '@mantine/core';
@@ -8,10 +8,8 @@ import classes from './App.module.css';
 
 function App() {
   const [games, setGames] = useState<Game[]>([]);
+  const [filter, setFilter] = useState<'All' | 'Today'>('All');
   const [showModal, setShowModal] = useState(false);
-
-  // Ukupan broj odigranih partija
-  const totalGames = games?.length;
 
   // Povlačenje svih partija iz baze
   useEffect(() => {
@@ -59,6 +57,43 @@ function App() {
     supabaseClient.auth.signOut();
   }
 
+  // Filtitranje partija
+  const filteredGames = useMemo(() => {
+    if (filter === 'All') return games;
+
+    const now = new Date();
+
+    const startOfDay = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      0,
+      0,
+      0,
+      0,
+    );
+
+    const endOfDay = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      23,
+      59,
+      59,
+      999,
+    );
+
+    return games.filter((game) => {
+      const gameDate = new Date(game.created_at);
+      return gameDate >= startOfDay && gameDate <= endOfDay;
+    });
+  }, [games, filter]);
+
+  // Promena vrednosti filtera
+  function handleFilterChange(value: 'All' | 'Today') {
+    setFilter(value);
+  }
+
   return (
     <Container>
       <Stack py="xl" className={classes.box}>
@@ -73,7 +108,12 @@ function App() {
             </Trigger>
           </Group>
         </Group>
-        <Stats games={games} totalGames={totalGames} />
+        <Stats
+          games={filteredGames}
+          totalGames={filteredGames.length}
+          filter={filter}
+          onFilterChange={handleFilterChange}
+        />
         <NewGameModal
           isOpen={showModal}
           onSubmit={handleNewGame}

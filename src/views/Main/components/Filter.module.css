@@ -1,0 +1,9 @@
+.box {
+  @media (max-width: 768px) {
+    margin-bottom: 32px !important;
+  }
+}
+
+.box {
+  margin-bottom: 44px;
+}

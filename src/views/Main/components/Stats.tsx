@@ -1,13 +1,18 @@
 import { Card } from '@mantine/core';
 
-import { Legend, MatchSummary, Comparison } from './index';
+import { Filter, Legend, MatchSummary, Comparison } from './index';
 import { AppConstants } from '../../../constants';
 import { Game, StatsProps } from '../../../types';
 import classes from './Stats.module.css';
 
 const { player1Id, player2Id } = AppConstants;
 
-export default function Stats({ games, totalGames }: StatsProps) {
+export default function Stats({
+  games,
+  totalGames,
+  filter,
+  onFilterChange,
+}: StatsProps) {
   // Ukupan broj pobeda
   const p1Wins = games.filter((game: Game) => game.winner === player1Id).length;
   const p2Wins = games.filter((game: Game) => game.winner === player2Id).length;
@@ -161,6 +166,14 @@ export default function Stats({ games, totalGames }: StatsProps) {
     player2Id,
   );
 
+  function safeDivide(a: number, b: number) {
+    if (b === 0) {
+      return 0;
+    }
+
+    return a / b;
+  }
+
   return (
     <Card
       shadow="xl"
@@ -170,6 +183,7 @@ export default function Stats({ games, totalGames }: StatsProps) {
       bg="#071e34ff"
       className={classes.stats}
     >
+      <Filter filter={filter} onFilterChange={onFilterChange} />
       <MatchSummary p1Wins={p1Wins} p2Wins={p2Wins} />
       <Legend>Player strength</Legend>
       <Comparison
@@ -250,9 +264,9 @@ export default function Stats({ games, totalGames }: StatsProps) {
         Total balls potted
       </Comparison>
       <Comparison
-        p1Value={p1TotalPottedBalls / totalGames}
+        p1Value={safeDivide(p1TotalPottedBalls, totalGames)}
         p1Total={8}
-        p2Value={p2TotalPottedBalls / totalGames}
+        p2Value={safeDivide(p2TotalPottedBalls, totalGames)}
         p2Total={8}
         compareValues
         decimal={1}
@@ -261,9 +275,9 @@ export default function Stats({ games, totalGames }: StatsProps) {
         Avg. balls potted / game
       </Comparison>
       <Comparison
-        p1Value={p1TotalPottedBallsInLostGame / p1TotalLostGames}
+        p1Value={safeDivide(p1TotalPottedBallsInLostGame, p1TotalLostGames)}
         p1Total={p1TotalLostGames}
-        p2Value={p2TotalPottedBallsInLostGame / p2TotalLostGames}
+        p2Value={safeDivide(p2TotalPottedBallsInLostGame, p2TotalLostGames)}
         p2Total={p2TotalLostGames}
         compareValues
         smallerIsBetter

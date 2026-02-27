@@ -21,6 +21,13 @@ export interface TriggerProps {
 export interface StatsProps {
   games: Game[];
   totalGames: number;
+  filter: 'All' | 'Today';
+  onFilterChange: (string) => void;
+}
+
+export interface FilterProps {
+  filter: 'All' | 'Today';
+  onFilterChange: (string) => void;
 }
 
 export interface MatchSummaryProps {

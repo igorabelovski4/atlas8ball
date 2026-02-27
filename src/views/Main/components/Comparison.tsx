@@ -15,8 +15,20 @@ export default function Comparison({
   smallerIsBetter = false,
   children,
 }: ComparisonProps) {
-  const p1Perc = parseFloat(((p1Value / p1Total) * 100).toFixed(decimal));
-  const p2Perc = parseFloat(((p2Value / p2Total) * 100).toFixed(decimal));
+  function safeDivide(a: number, b: number) {
+    if (b === 0) {
+      return 0;
+    }
+
+    return a / b;
+  }
+
+  const p1Perc = parseFloat(
+    (safeDivide(p1Value, p1Total) * 100).toFixed(decimal),
+  );
+  const p2Perc = parseFloat(
+    (safeDivide(p2Value, p2Total) * 100).toFixed(decimal),
+  );
 
   const p1Val = parseFloat(p1Value.toFixed(decimal));
   const p2Val = parseFloat(p2Value.toFixed(decimal));

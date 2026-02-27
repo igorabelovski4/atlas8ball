@@ -1,6 +1,7 @@
 import Bar from './Bar';
 import Comparison from './Comparison';
 import Decider from './Decider';
+import Filter from './Filter';
 import Legend from './Legend';
 import MatchSummary from './MatchSummary';
 import NewGameModal from './NewGameModal';
@@ -16,6 +17,7 @@ export {
   Bar,
   Comparison,
   Decider,
+  Filter,
   Legend,
   Picker,
   PlayerSummary,
