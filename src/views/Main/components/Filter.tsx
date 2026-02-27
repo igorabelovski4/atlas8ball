@@ -16,6 +16,7 @@ export default function Filter({
       className={classes.box}
       value={filter}
       size="md"
+      radius="md"
       onChange={(value) => onFilterChange(value)}
     />
   );
