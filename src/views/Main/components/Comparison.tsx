@@ -15,6 +15,7 @@ export default function Comparison({
   smallerIsBetter = false,
   children,
 }: ComparisonProps) {
+  // Safe podela ukoliko je broj partija 0
   function safeDivide(a: number, b: number) {
     if (b === 0) {
       return 0;
