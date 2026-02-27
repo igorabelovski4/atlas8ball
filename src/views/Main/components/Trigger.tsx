@@ -10,7 +10,7 @@ export default function Trigger({
     <Button
       size="md"
       radius="md"
-      color={danger ? 'red' : 'green'}
+      color={danger ? 'red' : '#0ca678'}
       onClick={onClick}
     >
       {children}
